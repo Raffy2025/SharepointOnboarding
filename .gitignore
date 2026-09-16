@@ -1,0 +1,9 @@
+# Secrets / auth
+*.pfx
+*.pem
+*secret*
+*credential*
+.env
+
+# PnP PowerShell cached tokens/logs
+*.log
