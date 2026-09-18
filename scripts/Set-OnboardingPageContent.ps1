@@ -39,7 +39,8 @@ function Build-Page {
         [string]$Intro,
         [array]$LeftBlocks,
         [array]$RightBlocks,
-        [string]$LinksHtml
+        [string]$LinksHtml,
+        [bool]$CommentsEnabled = $true
     )
 
     $page = Get-PnPPage -Identity $PageName
@@ -56,7 +57,7 @@ function Build-Page {
     Add-PnPPageSection -Page $PageName -SectionTemplate OneColumn -Order 3 -ZoneEmphasis 1 | Out-Null
     Add-PnPPageTextPart -Page $PageName -Text "<h3>Related resources</h3>$LinksHtml" -Section 3 -Column 1 | Out-Null
 
-    Set-PnPPage -Identity $PageName -Publish
+    Set-PnPPage -Identity $PageName -CommentsEnabled:$CommentsEnabled -Publish
     Write-Host "Rebuilt page: $PageName" -ForegroundColor Green
 }
 
@@ -84,7 +85,8 @@ Build-Page -PageName "Before-You-Start" -Intro "Here's everything you need to kn
         @{ Heading = "Office location & access"; Body = "[Office address, parking instructions, building access/badge process.]" },
         @{ Heading = "Emergency & facilities contacts"; Body = "[Facilities contact name/number, emergency procedures.]" }
     ) `
-    -LinksHtml "<ul><li>$checklistLink</li><li>$resourcesLink</li></ul>"
+    -LinksHtml "<ul><li>$checklistLink</li><li>$resourcesLink</li></ul>" `
+    -CommentsEnabled $false
 
 Build-Page -PageName "IT-Systems" -Intro "Get your accounts, devices, and tools set up and ready to go." `
     -LeftBlocks @(
@@ -96,7 +98,8 @@ Build-Page -PageName "IT-Systems" -Intro "Get your accounts, devices, and tools 
         @{ Heading = "VPN & remote access"; Body = "[VPN client, remote access setup instructions.]" },
         @{ Heading = "IT helpdesk"; Body = "[Helpdesk contact and ticket submission link.]" }
     ) `
-    -LinksHtml "<ul><li>$resourcesLink</li></ul>"
+    -LinksHtml "<ul><li>$resourcesLink</li></ul>" `
+    -CommentsEnabled $false
 
 Build-Page -PageName "Policies-Benefits" -Intro "Understand your benefits, policies, and what's required of you." `
     -LeftBlocks @(
@@ -108,7 +111,8 @@ Build-Page -PageName "Policies-Benefits" -Intro "Understand your benefits, polic
         @{ Heading = "Payroll setup"; Body = "[Bank details and tax form submission instructions.]" },
         @{ Heading = "Mandatory compliance training"; Body = "[Checklist of required training modules and due dates.]" }
     ) `
-    -LinksHtml "<ul><li>$resourcesLink</li><li>$checklistLink</li></ul>"
+    -LinksHtml "<ul><li>$resourcesLink</li><li>$checklistLink</li></ul>" `
+    -CommentsEnabled $false
 
 Build-Page -PageName "Managers-Buddies" -Intro "Resources for managers and buddies supporting a new hire." `
     -LeftBlocks @(
@@ -119,6 +123,7 @@ Build-Page -PageName "Managers-Buddies" -Intro "Resources for managers and buddi
         @{ Heading = "New-hire progress tracker"; Body = "Track progress via the $checklistLink." },
         @{ Heading = "Escalation contacts"; Body = "[HR business partner and IT escalation contacts.]" }
     ) `
-    -LinksHtml "<ul><li>$checklistLink</li></ul>"
+    -LinksHtml "<ul><li>$checklistLink</li></ul>" `
+    -CommentsEnabled $false
 
 Write-Host "All pages rebuilt with structured layout and draft content." -ForegroundColor Green
