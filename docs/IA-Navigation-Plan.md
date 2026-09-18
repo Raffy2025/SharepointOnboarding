@@ -74,3 +74,13 @@ Some content is shared; some is role-specific. Role-specific content is called o
 - Company culture & directory content (org chart, mission/values, employee directory)
 - Role/team-specific resource pages
 - Custom branding (theme colors, logo, fonts)
+
+## Existing template pages (to be replaced)
+The site was provisioned from Microsoft's built-in "Employee onboarding" look-book
+template, which left these pages in place: `New-employee-training.aspx`,
+`How-we-work.aspx`, `Meet-the-team.aspx`, `About-me.aspx`,
+`Employee-onboarding-team-home.aspx`. Decision: our 4 pillar pages (Before You
+Start, IT & Systems, Policies & Benefits, For Managers & Buddies) supersede
+these. Not yet removed/redirected - follow-up task once our pages have real
+content and the template pages' content has been reviewed for anything worth
+carrying over.
